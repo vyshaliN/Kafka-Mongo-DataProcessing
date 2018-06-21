@@ -13,16 +13,11 @@ import java.util.List;
 @RequestMapping("/kafkaMongo")
 public class ConsumerController {
 
-    private final KafkaConsumer consumer;
-    List<Employee> listGenerated;
+    @Autowired
+    private  KafkaConsumer consumer;
 
     @Autowired
     EmployeeRepository repository;
-
-
-    public ConsumerController(KafkaConsumer consumer){
-        this.consumer=consumer;
-    }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void create(@RequestBody Employee employee) {
@@ -34,7 +29,7 @@ public class ConsumerController {
 
         try{
             Employee employeeFromMongo = repository.findByEmpId(id);
-            listGenerated = consumer.processMessage(employee);
+            List<Employee> listGenerated = consumer.processMessage(employee);
             Iterator it = listGenerated.iterator();
             while(it.hasNext()){
                 Employee prodFromKafka = (Employee) it.next();

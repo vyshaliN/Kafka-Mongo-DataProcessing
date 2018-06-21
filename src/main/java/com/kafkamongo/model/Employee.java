@@ -8,23 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Employee {
 
     @Id
-    String empId;
-    String empName;
-    String designation;
+    private String empId;
+    private String empName;
+    private String designation;
 
     @JsonInclude
-    String address;
+    private String address;
 
-     /*public Employee(){
-
-    }
-
-    public Employee(String productId,String productName,String description,Double price){
-        this.productId = productId;
-        this.productName = productName;
-        this.description = description;
-        this.price = price;
-    }*/
 
     public String getEmpId() {
         return empId;

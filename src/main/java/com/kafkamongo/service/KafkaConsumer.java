@@ -16,7 +16,6 @@ public class KafkaConsumer {
     public List<Employee> processMessage(Employee employee) {
         if(employee.getEmpId()!=null)
             employeeDetails.add(employee);
-        System.out.println("received content = " + employee);
         return employeeDetails;
     }
 }
